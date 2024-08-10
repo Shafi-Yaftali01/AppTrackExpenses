@@ -1,5 +1,5 @@
 {
-  "name": "luis/phpiggy",
+  "name": "shfi/phpiggy",
   "description": "A PHP application for tracking expenses.",
   "type": "project",
   "require": {},
@@ -12,5 +12,8 @@
       "src/App/Config/Routes.php",
       "src/App/Config/Middleware.php"
     ]
+  },
+  "scripts" : {
+    "phpiggy" : "php cli.php"
   }
 }
