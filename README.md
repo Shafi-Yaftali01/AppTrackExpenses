@@ -1,2 +1,2 @@
-# TrackingExpenses
- PHP Application for tracking expenses. 
+# phpiggy
+ A PHP application for tracking expenses.

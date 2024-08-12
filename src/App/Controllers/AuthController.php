@@ -13,7 +13,8 @@ class AuthController
     private TemplateEngine $view,
     private ValidatorService $validatorService,
     private UserService $userService
-  ) {}
+  ) {
+  }
 
   public function registerView()
   {
@@ -39,6 +40,7 @@ class AuthController
   public function login()
   {
     $this->validatorService->validateLogin($_POST);
+
     $this->userService->login($_POST);
 
     redirectTo('/');
@@ -47,6 +49,7 @@ class AuthController
   public function logout()
   {
     $this->userService->logout();
+
     redirectTo('/login');
   }
 }

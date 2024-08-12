@@ -35,15 +35,17 @@ class App
     return $this;
   }
 
-  public function post(string $path, array $controller): APP
+  public function post(string $path, array $controller): App
   {
     $this->router->add('POST', $path, $controller);
+
     return $this;
   }
 
-  public function delete(string $path, array $controller): APP
+  public function delete(string $path, array $controller): App
   {
     $this->router->add('DELETE', $path, $controller);
+
     return $this;
   }
 

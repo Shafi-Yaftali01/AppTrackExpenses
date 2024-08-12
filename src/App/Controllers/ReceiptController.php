@@ -9,85 +9,86 @@ use App\Services\{TransactionService, ReceiptService};
 
 class ReceiptController
 {
-    public function __construct(
-        private TemplateEngine $view,
-        private TransactionService $transactionService,
-        private ReceiptService $receiptService
-    ) {}
+  public function __construct(
+    private TemplateEngine $view,
+    private TransactionService $transactionService,
+    private ReceiptService $receiptService
+  ) {
+  }
 
-    public function uploadView(array $params)
-    {
-        $transaction = $this->transactionService->getUserTransaction($params['transaction']);
+  public function uploadView(array $params)
+  {
+    $transaction = $this->transactionService->getUserTransaction($params['transaction']);
 
-        if (!$transaction) {
-            redirectTo("/");
-        }
-
-        echo $this->view->render("receipts/create.php");
+    if (!$transaction) {
+      redirectTo("/");
     }
 
-    public function upload(array $params)
-    {
-        $transaction = $this->transactionService->getUserTransaction($params['transaction']);
+    echo $this->view->render("receipts/create.php");
+  }
 
-        if (!$transaction) {
-            redirectTo("/");
-        }
+  public function upload(array $params)
+  {
+    $transaction = $this->transactionService->getUserTransaction($params['transaction']);
 
-        $receiptFile = $_FILES['receipt'] ?? null;
-
-        $this->receiptService->validateFile($receiptFile);
-
-        $this->receiptService->upload($receiptFile, $transaction['id']);
-
-        redirectTo("/");
+    if (!$transaction) {
+      redirectTo("/");
     }
 
-    public function download(array $params)
-    {
-        $transaction = $this->transactionService->getUserTransaction(
-            $params['transaction']
-        );
+    $receiptFile = $_FILES['receipt'] ?? null;
 
-        if (empty($transaction)) {
-            redirectTo('/');
-        }
+    $this->receiptService->validateFile($receiptFile);
 
-        $receipt = $this->receiptService->getReceipt($params['receipt']);
+    $this->receiptService->upload($receiptFile, $transaction['id']);
 
-        if (empty($receipt)) {
-            redirectTo('/');
-        }
+    redirectTo("/");
+  }
 
-        if ($receipt['transaction_id'] !== $transaction['id']) {
-            redirectTo('/');
-        }
+  public function download(array $params)
+  {
+    $transaction = $this->transactionService->getUserTransaction(
+      $params['transaction']
+    );
 
-        $this->receiptService->read($receipt);
+    if (empty($transaction)) {
+      redirectTo('/');
     }
 
-    public function delete(array $params)
-    {
-        $transaction = $this->transactionService->getUserTransaction(
-            $params['transaction']
-        );
+    $receipt = $this->receiptService->getReceipt($params['receipt']);
 
-        if (empty($transaction)) {
-            redirectTo('/');
-        }
-
-        $receipt = $this->receiptService->getReceipt($params['receipt']);
-
-        if (empty($receipt)) {
-            redirectTo('/');
-        }
-
-        if ($receipt['transaction_id'] !== $transaction['id']) {
-            redirectTo('/');
-        }
-
-        $this->receiptService->delete($receipt);
-
-        redirectTo('/');
+    if (empty($receipt)) {
+      redirectTo('/');
     }
+
+    if ($receipt['transaction_id'] !== $transaction['id']) {
+      redirectTo('/');
+    }
+
+    $this->receiptService->read($receipt);
+  }
+
+  public function delete(array $params)
+  {
+    $transaction = $this->transactionService->getUserTransaction(
+      $params['transaction']
+    );
+
+    if (empty($transaction)) {
+      redirectTo('/');
+    }
+
+    $receipt = $this->receiptService->getReceipt($params['receipt']);
+
+    if (empty($receipt)) {
+      redirectTo('/');
+    }
+
+    if ($receipt['transaction_id'] !== $transaction['id']) {
+      redirectTo('/');
+    }
+
+    $this->receiptService->delete($receipt);
+
+    redirectTo('/');
+  }
 }

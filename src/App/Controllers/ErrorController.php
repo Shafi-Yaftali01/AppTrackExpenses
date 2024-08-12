@@ -8,10 +8,12 @@ use Framework\TemplateEngine;
 
 class ErrorController
 {
-    public function __construct(private TemplateEngine $view) {}
+  public function __construct(private TemplateEngine $view)
+  {
+  }
 
-    public function notFound()
-    {
-        echo $this->view->render("errors/not-found.php");
-    }
+  public function notFound()
+  {
+    echo $this->view->render("errors/not-found.php");
+  }
 }

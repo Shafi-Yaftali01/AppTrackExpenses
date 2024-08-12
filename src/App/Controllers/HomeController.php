@@ -12,7 +12,8 @@ class HomeController
   public function __construct(
     private TemplateEngine $view,
     private TransactionService $transactionService
-  ) {}
+  ) {
+  }
 
   public function home()
   {
@@ -29,13 +30,15 @@ class HomeController
 
     $lastPage = ceil($count / $length);
     $pages = $lastPage ? range(1, $lastPage) : [];
+
     $pageLinks = array_map(
-      fn($pageNum) => http_build_query([
+      fn ($pageNum) => http_build_query([
         'p' => $pageNum,
         's' => $searchTerm
       ]),
       $pages
     );
+
     echo $this->view->render("index.php", [
       'transactions' => $transactions,
       'currentPage' => $page,
