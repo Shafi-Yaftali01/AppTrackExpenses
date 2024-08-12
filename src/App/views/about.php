@@ -7,8 +7,10 @@
 
   <hr />
 
-  <!-- Escaping Data -->
-  <p>Escaping Data: <?php echo e($dangerousData); ?></p>
+  <!-- Description -->
+  <p><strong>Description:</strong><br>
+    TrackingExpenses is a PHP-based application designed to help users effectively manage and track their financial expenses. The application allows users to connect to a database where all transaction data is stored securely. This tool is ideal for individuals or businesses looking to keep a detailed record of their expenditures, categorize them, and generate insightful reports.
+  </p>
 </section>
 <!-- End Main Content Area -->
 
